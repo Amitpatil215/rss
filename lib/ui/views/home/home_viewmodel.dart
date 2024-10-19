@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rss/app/app.bottomsheets.dart';
 import 'package:rss/app/app.dialogs.dart';
 import 'package:rss/app/app.locator.dart';
@@ -15,9 +15,9 @@ class HomeViewModel extends BaseViewModel {
   int _counter = 0;
 
   void incrementCounter() async {
-    // await FirebaseFirestore.instance
-    //     .collection('user')
-    //     .add(User(name: "as", age: 12, email: "email"));
+    await FirebaseFirestore.instance.collection('user').add(
+      {'Name': 'Abhishek', 'Mobile': '1234', 'Email': 'z2N7z@example.com'},
+    );
     _counter++;
     rebuildUi();
   }
