@@ -28,29 +28,28 @@ class FeedView extends StackedView<FeedViewModel> {
             SizedBox(
               height: MediaQuery.of(context).padding.top,
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (int i = 0; i < 15; i++)
-                    const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Chip(
-                          label: Text(
-                        "Video",
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    )
-                ],
-              ),
-            ),
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: [
+            //       for (int i = 0; i < 15; i++)
+            //         const Padding(
+            //           padding: EdgeInsets.all(5.0),
+            //           child: Chip(
+            //               label: Text(
+            //             "Video",
+            //             style: TextStyle(color: Colors.black),
+            //           )),
+            //         )
+            //     ],
+            //   ),
+            // ),
             Expanded(
               child: FirestoreListView<PostsModel>(
-                pageSize: 2,
+                pageSize: 15,
                 query: viewModel.postsQuery,
                 itemBuilder: (context, snapshot) {
                   PostsModel postModel = snapshot.data();
-
                   return Slidable(
                     // Specify a key if the Slidable is dismissible.
                     key: ValueKey(postModel.id),
@@ -62,19 +61,19 @@ class FeedView extends StackedView<FeedViewModel> {
 
                       // A pane can dismiss the Slidable.
                       dismissible: DismissiblePane(onDismissed: () {}),
-
+                      dragDismissible: false,
                       // All actions are defined in the children parameter.
                       children: [
                         // A SlidableAction can have an icon and/or a label.
                         SlidableAction(
-                          onPressed: (s) {},
+                          onPressed: (context) {},
                           backgroundColor: Colors.purpleAccent,
                           foregroundColor: Colors.white,
                           icon: Icons.alarm,
                           label: 'Snooze',
                         ),
                         SlidableAction(
-                          onPressed: (s) {},
+                          onPressed: (s) => viewModel.completeTask(postModel),
                           backgroundColor: Colors.greenAccent,
                           foregroundColor: Colors.white,
                           icon: Icons.check,
@@ -88,11 +87,11 @@ class FeedView extends StackedView<FeedViewModel> {
                       motion: const ScrollMotion(),
                       children: [
                         SlidableAction(
-                          onPressed: (s) {},
+                          onPressed: (s) => viewModel.updateLastSeen(postModel),
                           backgroundColor: Colors.purple,
                           foregroundColor: Colors.white,
-                          icon: Icons.date_range,
-                          label: 'Change Date',
+                          icon: Icons.remove_red_eye_outlined,
+                          label: 'Seen',
                         ),
                       ],
                     ),

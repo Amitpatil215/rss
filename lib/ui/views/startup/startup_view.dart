@@ -20,7 +20,8 @@ class StartupView extends StackedView<StartupViewModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'STACKED',
+              'Spaced\nRepetition',
+              textAlign: TextAlign.center,
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
             ),
             Row(

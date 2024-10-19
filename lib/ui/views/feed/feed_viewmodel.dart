@@ -14,7 +14,7 @@ class FeedViewModel extends BaseViewModel {
       .collection('posts')
       .where('status', isEqualTo: 'pending')
       .orderBy('due_date', descending: false)
-      .orderBy('last_seen', descending: true)
+      .orderBy('last_seen', descending: false)
       .withConverter<PostsModel>(
         fromFirestore: (snapshot, _) =>
             PostsModel.fromJson(snapshot.data()!, snapshot.reference.id),
@@ -27,5 +27,21 @@ class FeedViewModel extends BaseViewModel {
       title: ksHomeBottomSheetTitle,
       description: ksHomeBottomSheetDescription,
     );
+  }
+
+  void completeTask(PostsModel post) async {
+    await FirebaseFirestore.instance.collection('posts').doc(post.id).update(
+          PostsModel(
+            status: 'completed',
+            lastSeen: DateTime.now(),
+          ).toJsonNoNull(),
+        );
+  }
+
+  Future updateLastSeen(PostsModel post) async {
+    await FirebaseFirestore.instance
+        .collection('posts')
+        .doc(post.id)
+        .update(PostsModel(lastSeen: DateTime.now()).toJsonNoNull());
   }
 }
