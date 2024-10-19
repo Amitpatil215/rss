@@ -50,7 +50,7 @@ class FeedView extends StackedView<FeedViewModel> {
 
                   return Slidable(
                     // Specify a key if the Slidable is dismissible.
-                    key: const ValueKey(0),
+                    key: ValueKey(postModel.id),
 
                     // The start action pane is the one at the left or the top side.
                     startActionPane: ActionPane(
@@ -65,40 +65,31 @@ class FeedView extends StackedView<FeedViewModel> {
                         // A SlidableAction can have an icon and/or a label.
                         SlidableAction(
                           onPressed: (s) {},
-                          backgroundColor: Color(0xFFFE4A49),
+                          backgroundColor: Colors.purpleAccent,
                           foregroundColor: Colors.white,
-                          icon: Icons.delete,
-                          label: 'Delete',
+                          icon: Icons.alarm,
+                          label: 'Snooze',
                         ),
                         SlidableAction(
                           onPressed: (s) {},
-                          backgroundColor: Color(0xFF21B7CA),
+                          backgroundColor: Colors.greenAccent,
                           foregroundColor: Colors.white,
-                          icon: Icons.share,
-                          label: 'Share',
+                          icon: Icons.check,
+                          label: 'Complete',
                         ),
                       ],
                     ),
 
                     // The end action pane is the one at the right or the bottom side.
                     endActionPane: ActionPane(
-                      motion: ScrollMotion(),
+                      motion: const ScrollMotion(),
                       children: [
                         SlidableAction(
-                          // An action can be bigger than the others.
-                          flex: 2,
                           onPressed: (s) {},
-                          backgroundColor: Color(0xFF7BC043),
+                          backgroundColor: Colors.purple,
                           foregroundColor: Colors.white,
-                          icon: Icons.archive,
-                          label: 'Archive',
-                        ),
-                        SlidableAction(
-                          onPressed: (s) {},
-                          backgroundColor: Color(0xFF0392CF),
-                          foregroundColor: Colors.white,
-                          icon: Icons.save,
-                          label: 'Save',
+                          icon: Icons.date_range,
+                          label: 'Change Date',
                         ),
                       ],
                     ),

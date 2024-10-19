@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rss/model/posts.dart';
 import 'package:stacked/stacked.dart';
 
 class CreatePostSheetModel extends BaseViewModel {
@@ -7,16 +8,15 @@ class CreatePostSheetModel extends BaseViewModel {
   void createPost() {
     if (textController.text.isNotEmpty) {
       print(textController.text);
-      FirebaseFirestore.instance.collection('posts').add(
-        {
-          'text': textController.text,
-          'url': "https://google.com",
-          'created_at': FieldValue.serverTimestamp(),
-          'last_seen': FieldValue.serverTimestamp(),
-          'status': 'pending', //Pending, Completed, Snoozed
-          'due_date': FieldValue.serverTimestamp(),
-        },
-      );
+      FirebaseFirestore.instance.collection('posts').add(PostsModel(
+              text: textController.text,
+              id: null,
+              url: "https://google.com",
+              createdAt: DateTime.now(),
+              lastSeen: DateTime.now(),
+              status: "pending",
+              dueDate: DateTime.now())
+          .toJson());
     }
   }
 }

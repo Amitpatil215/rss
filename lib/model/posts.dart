@@ -1,22 +1,21 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class PostsModel {
   final String? text;
   final String? id;
   final String? url;
-  final Timestamp? createdAt;
-  final Timestamp? lastSeen;
+  final DateTime? createdAt;
+  final DateTime? lastSeen;
+
   final String? status; // Pending, Completed, Snoozed
-  final Timestamp? dueDate;
+  final DateTime? dueDate;
 
   PostsModel({
-    required this.text,
-    required this.id,
-    required this.url,
-    required this.createdAt,
-    required this.lastSeen,
-    required this.status,
-    required this.dueDate,
+    this.text,
+    this.id,
+    this.url,
+    this.createdAt,
+    this.lastSeen,
+    this.status,
+    this.dueDate,
   });
 
   // Factory constructor for creating a new PostsModel instance from a map
@@ -25,10 +24,10 @@ class PostsModel {
       text: json['text'] as String?,
       id: docId,
       url: json['url'] as String?,
-      createdAt: json['created_at'] as Timestamp?,
-      lastSeen: json['last_seen'] as Timestamp?,
+      createdAt: json['created_at']?.toDate() as DateTime?,
+      lastSeen: json['last_seen']?.toDate() as DateTime?,
       status: json['status'] as String?,
-      dueDate: json['due_date'] as Timestamp?,
+      dueDate: json['due_date']?.toDate() as DateTime?,
     );
   }
 
@@ -43,5 +42,26 @@ class PostsModel {
       'status': status,
       'due_date': dueDate,
     };
+  }
+
+  // to JSON only no null values
+  Map<String, dynamic> toJsonNoNull() {
+    return {
+      'text': text,
+      'id': id,
+      'url': url,
+      'created_at': createdAt,
+      'last_seen': lastSeen,
+      'status': status,
+      'due_date': dueDate,
+    }.withoutNulls();
+  }
+}
+
+extension MapUtils<K, V> on Map<K, V> {
+  /// Removes all entries in the map that have null values.
+  Map<K, V> withoutNulls() {
+    // Create a new map that includes only key-value pairs where the value is not null.
+    return Map.fromEntries(entries.where((entry) => entry.value != null));
   }
 }
