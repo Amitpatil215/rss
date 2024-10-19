@@ -1,5 +1,6 @@
 class PostsModel {
   final String? text;
+  final String? desc;
   final String? id;
   final String? url;
   final DateTime? createdAt;
@@ -10,6 +11,7 @@ class PostsModel {
 
   PostsModel({
     this.text,
+    this.desc,
     this.id,
     this.url,
     this.createdAt,
@@ -22,6 +24,7 @@ class PostsModel {
   factory PostsModel.fromJson(Map<String, dynamic> json, String docId) {
     return PostsModel(
       text: json['text'] as String?,
+      desc: json['desc'] as String?,
       id: docId,
       url: json['url'] as String?,
       createdAt: json['created_at']?.toDate() as DateTime?,
@@ -35,6 +38,7 @@ class PostsModel {
   Map<String, dynamic> toJson() {
     return {
       'text': text,
+      'desc': desc,
       'id': id,
       'url': url,
       'created_at': createdAt,
@@ -48,6 +52,7 @@ class PostsModel {
   Map<String, dynamic> toJsonNoNull() {
     return {
       'text': text,
+      'desc': desc,
       'id': id,
       'url': url,
       'created_at': createdAt,

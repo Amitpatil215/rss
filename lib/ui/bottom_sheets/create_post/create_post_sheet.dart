@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rss/ui/common/app_colors.dart';
 import 'package:rss/ui/common/ui_helpers.dart';
 import 'package:rss/utils/widgets/next_gen_button/next_gen_button.dart';
 import 'package:stacked/stacked.dart';
@@ -36,9 +35,9 @@ class CreatePostSheet extends StackedView<CreatePostSheetModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
+          const Text(
             'Add a new post!!',
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
           ),
           verticalSpaceTiny,
           Form(

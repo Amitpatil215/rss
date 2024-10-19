@@ -3,6 +3,7 @@ import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:readmore/readmore.dart';
+import 'package:rss/common/app_text_theme.dart';
 import 'package:rss/model/posts.dart';
 import 'package:stacked/stacked.dart';
 
@@ -44,6 +45,7 @@ class FeedView extends StackedView<FeedViewModel> {
             ),
             Expanded(
               child: FirestoreListView<PostsModel>(
+                pageSize: 2,
                 query: viewModel.postsQuery,
                 itemBuilder: (context, snapshot) {
                   PostsModel postModel = snapshot.data();
@@ -103,33 +105,61 @@ class FeedView extends StackedView<FeedViewModel> {
                         borderRadius: BorderRadius.circular(10.0),
                         border: Border.all(color: Colors.black12),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          AnyLinkPreview(
-                            removeElevation: true,
-                            link: "https://youtu.be/watch?v=W1pNjxmNHNQ",
-                            bodyMaxLines: 2,
-                            cache: const Duration(hours: 5),
-                            borderRadius: 10,
-                            backgroundColor: Colors.white,
-                            errorWidget: Container(
-                              color: Colors.white,
-                              child: const Text('Oops!'),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(
-                                left: 10, right: 10, bottom: 10),
-                            child: ReadMoreText(
-                              postModel.text ?? '',
-                              trimMode: TrimMode.Line,
-                              trimLines: 3,
-                              colorClickableText: Colors.pink,
-                              trimCollapsedText: 'Show more',
-                              trimExpandedText: ' Show less',
-                              moreStyle: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.bold),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (postModel.url != null)
+                                  AnyLinkPreview(
+                                    removeElevation: true,
+                                    link: postModel.url!,
+                                    bodyMaxLines: 2,
+                                    cache: const Duration(hours: 5),
+                                    borderRadius: 10,
+                                    backgroundColor: Colors.white,
+                                    errorWidget: Container(
+                                      color: Colors.white,
+                                      child: const Text('Oops!'),
+                                    ),
+                                  ),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10, top: 10),
+                                  child: ReadMoreText(
+                                    postModel.text ?? '',
+                                    trimMode: TrimMode.Line,
+                                    trimLines: 3,
+                                    colorClickableText: Colors.pink,
+                                    trimCollapsedText: 'Show more',
+                                    trimExpandedText: ' Show less',
+                                    style: AppTextStyles.bodyText1H,
+                                    moreStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                    left: 10,
+                                    right: 10,
+                                    bottom: 10,
+                                  ),
+                                  child: ReadMoreText(
+                                    postModel.desc ?? '',
+                                    trimMode: TrimMode.Line,
+                                    trimLines: 3,
+                                    colorClickableText: Colors.pink,
+                                    trimCollapsedText: 'Show more',
+                                    trimExpandedText: ' Show less',
+                                    style: AppTextStyles.bodyText2,
+                                    moreStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
