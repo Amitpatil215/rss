@@ -2,6 +2,7 @@ import 'package:any_link_preview/any_link_preview.dart';
 import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
 import 'package:rss/common/app_text_theme.dart';
 import 'package:rss/model/posts.dart';
@@ -144,7 +145,6 @@ class FeedView extends StackedView<FeedViewModel> {
                                   padding: const EdgeInsets.only(
                                     left: 10,
                                     right: 10,
-                                    bottom: 10,
                                   ),
                                   child: ReadMoreText(
                                     postModel.desc ?? '',
@@ -157,6 +157,19 @@ class FeedView extends StackedView<FeedViewModel> {
                                     moreStyle: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                    left: 10,
+                                    right: 10,
+                                    bottom: 10,
+                                  ),
+                                  child: Text(
+                                    DateFormat('dd-MM-yyyy').format(
+                                      postModel.dueDate ?? DateTime.now(),
+                                    ),
+                                    style: AppTextStyles.caption,
                                   ),
                                 ),
                               ],

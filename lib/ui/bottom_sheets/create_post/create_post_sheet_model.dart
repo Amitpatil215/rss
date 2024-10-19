@@ -5,9 +5,13 @@ import 'package:rss/model/posts.dart';
 import 'package:rss/model/response_model/chatgpt_response.dart';
 import 'package:rss/repository/api_calls.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import '../../../app/app.locator.dart';
 
 class CreatePostSheetModel extends BaseViewModel {
   TextEditingController textController = TextEditingController();
+  final _bottomSheetService = locator<BottomSheetService>();
   void createPost() async {
     if (textController.text.isNotEmpty) {
       print(textController.text);
@@ -28,6 +32,8 @@ class CreatePostSheetModel extends BaseViewModel {
                 status: "pending",
                 dueDate: parseDate(formattedTask.dueDate))
             .toJson());
+
+        _bottomSheetService.completeSheet(SheetResponse());
       }
     }
   }

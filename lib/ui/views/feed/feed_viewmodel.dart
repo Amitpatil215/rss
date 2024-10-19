@@ -13,8 +13,8 @@ class FeedViewModel extends BaseViewModel {
   final postsQuery = FirebaseFirestore.instance
       .collection('posts')
       .where('status', isEqualTo: 'pending')
-      // .orderBy('due_date', descending: false)
-      // .orderBy('last_seen', descending: true)
+      .orderBy('due_date', descending: false)
+      .orderBy('last_seen', descending: true)
       .withConverter<PostsModel>(
         fromFirestore: (snapshot, _) =>
             PostsModel.fromJson(snapshot.data()!, snapshot.reference.id),
