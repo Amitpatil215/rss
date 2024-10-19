@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
 import 'package:rss/common/app_text_theme.dart';
 import 'package:rss/model/posts.dart';
+import 'package:rss/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
 import 'feed_viewmodel.dart';
@@ -20,7 +21,7 @@ class FeedView extends StackedView<FeedViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white.withOpacity(0.95),
       body: Container(
         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
         child: Column(
@@ -164,11 +165,29 @@ class FeedView extends StackedView<FeedViewModel> {
                                     right: 10,
                                     bottom: 10,
                                   ),
-                                  child: Text(
-                                    DateFormat('dd-MM-yyyy').format(
-                                      postModel.dueDate ?? DateTime.now(),
-                                    ),
-                                    style: AppTextStyles.caption,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "${DateFormat('dd MMM, HH:MM a').format(
+                                          postModel.lastSeen ?? DateTime.now(),
+                                        )} |",
+                                        style: AppTextStyles.caption,
+                                      ),
+                                      horizontalSpaceTiny,
+                                      Text(
+                                        "Due on ${DateFormat('dd MMM').format(
+                                          postModel.dueDate ?? DateTime.now(),
+                                        )} |",
+                                        style: AppTextStyles.caption,
+                                      ),
+                                      horizontalSpaceTiny,
+                                      Text(
+                                        "Created on ${DateFormat('dd MMM').format(
+                                          postModel.createdAt ?? DateTime.now(),
+                                        )}",
+                                        style: AppTextStyles.caption,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
