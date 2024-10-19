@@ -20,10 +20,10 @@ class PostsModel {
   });
 
   // Factory constructor for creating a new PostsModel instance from a map
-  factory PostsModel.fromJson(Map<String, dynamic> json) {
+  factory PostsModel.fromJson(Map<String, dynamic> json, String docId) {
     return PostsModel(
       text: json['text'] as String?,
-      id: json['id'] as String?,
+      id: docId,
       url: json['url'] as String?,
       createdAt: json['created_at'] as Timestamp?,
       lastSeen: json['last_seen'] as Timestamp?,

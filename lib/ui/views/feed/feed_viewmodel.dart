@@ -10,12 +10,12 @@ import '../../common/app_strings.dart';
 class FeedViewModel extends BaseViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
 
-  final postsQuery = FirebaseFirestore.instance
-      .collection('posts')
-      .withConverter<PostsModel>(
-        fromFirestore: (snapshot, _) => PostsModel.fromJson(snapshot.data()!),
-        toFirestore: (post, _) => post.toJson(),
-      );
+  final postsQuery =
+      FirebaseFirestore.instance.collection('posts').withConverter<PostsModel>(
+            fromFirestore: (snapshot, _) =>
+                PostsModel.fromJson(snapshot.data()!, snapshot.reference.id),
+            toFirestore: (post, _) => post.toJson(),
+          );
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.createPost,
