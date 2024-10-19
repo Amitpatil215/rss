@@ -1,8 +1,8 @@
 import 'package:any_link_preview/any_link_preview.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
-import 'package:rss/common/app_text_theme.dart';
-import 'package:rss/ui/common/ui_helpers.dart';
+import 'package:rss/model/posts.dart';
 import 'package:stacked/stacked.dart';
 
 import 'feed_viewmodel.dart';
@@ -42,9 +42,10 @@ class FeedView extends StackedView<FeedViewModel> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (BuildContext context, int index) {
+              child: FirestoreListView<PostsModel>(
+                query: viewModel.postsQuery,
+                itemBuilder: (context, snapshot) {
+                  PostsModel postModel = snapshot.data();
                   return Container(
                     margin: const EdgeInsets.only(bottom: 15.0),
                     decoration: BoxDecoration(
@@ -70,14 +71,14 @@ class FeedView extends StackedView<FeedViewModel> {
                         Container(
                           padding: const EdgeInsets.only(
                               left: 10, right: 10, bottom: 10),
-                          child: const ReadMoreText(
-                            'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+                          child: ReadMoreText(
+                            postModel.text ?? '',
                             trimMode: TrimMode.Line,
                             trimLines: 3,
                             colorClickableText: Colors.pink,
                             trimCollapsedText: 'Show more',
                             trimExpandedText: 'Show less',
-                            moreStyle: TextStyle(
+                            moreStyle: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                         ),

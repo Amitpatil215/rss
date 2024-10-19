@@ -47,14 +47,14 @@ class CreatePostSheet extends StackedView<CreatePostSheetModel> {
               TextFormField(
                 minLines: 2,
                 maxLines: 6,
-                // controller: viewModel.titleController,
+                controller: viewModel.textController,
                 decoration: NGFieldInputDecorations.formFieldInputDecoration(
                         context: context, labelText: "Text")
                     .copyWith(),
               ),
               verticalSpaceMedium,
               JJMainCallToActionButtonWeb(
-                onPressed: () {},
+                onPressed: viewModel.createPost,
                 width: double.infinity,
                 text: "Create",
               )
