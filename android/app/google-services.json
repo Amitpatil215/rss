@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "197707162705",
+    "project_id": "rss-spaced-rep",
+    "storage_bucket": "rss-spaced-rep.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197707162705:android:c3713a2d4371b14ad94470",
+        "android_client_info": {
+          "package_name": "com.example.rss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcmfrYSJEVG0JJZlqTCs-WcjhjrCPACQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197707162705:android:3bcbd716ed4531e6d94470",
+        "android_client_info": {
+          "package_name": "rss.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcmfrYSJEVG0JJZlqTCs-WcjhjrCPACQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
