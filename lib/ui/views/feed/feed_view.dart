@@ -77,7 +77,7 @@ class FeedView extends StackedView<FeedViewModel> {
                             trimLines: 3,
                             colorClickableText: Colors.pink,
                             trimCollapsedText: 'Show more',
-                            trimExpandedText: 'Show less',
+                            trimExpandedText: ' Show less',
                             moreStyle: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
@@ -93,7 +93,7 @@ class FeedView extends StackedView<FeedViewModel> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: viewModel.showBottomSheet,
-        child: Icon(Icons.add_card_rounded),
+        child: const Icon(Icons.add_card_rounded),
       ),
     );
   }
