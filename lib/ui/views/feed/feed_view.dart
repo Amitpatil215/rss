@@ -68,8 +68,8 @@ class FeedView extends StackedView<FeedViewModel> {
                           ),
                         ),
                         Container(
-                          padding:
-                              const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                          padding: const EdgeInsets.only(
+                              left: 10, right: 10, bottom: 10),
                           child: const ReadMoreText(
                             'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
                             trimMode: TrimMode.Line,
@@ -89,6 +89,10 @@ class FeedView extends StackedView<FeedViewModel> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: viewModel.showBottomSheet,
+        child: Icon(Icons.add_card_rounded),
       ),
     );
   }

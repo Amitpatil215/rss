@@ -5,6 +5,7 @@ import 'package:rss/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:rss/ui/views/feed/feed_view.dart';
+import 'package:rss/ui/bottom_sheets/create_post/create_post_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -22,7 +23,8 @@ import 'package:rss/ui/views/feed/feed_view.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: CreatePostSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
