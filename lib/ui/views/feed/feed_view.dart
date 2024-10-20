@@ -167,17 +167,31 @@ class FeedView extends StackedView<FeedViewModel> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        ReadMoreText(
-                                          postModel.text ?? '',
-                                          trimMode: TrimMode.Line,
-                                          trimLines: 3,
-                                          colorClickableText: Colors.pink,
-                                          trimCollapsedText: 'Show more',
-                                          trimExpandedText: ' Show less',
-                                          style: AppTextStyles.h6,
-                                          moreStyle: const TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold),
+                                        Row(
+                                          children: [
+                                            if (postModel.url != null)
+                                              const Icon(Icons.video_label_rounded,
+                                                  size: 15),
+                                            if (postModel.url == null)
+                                              const Icon(Icons.track_changes_outlined,
+                                                  size: 15),
+                                            horizontalSpaceTiny,
+                                            Expanded(
+                                              child: ReadMoreText(
+                                                postModel.text ?? '',
+                                                trimMode: TrimMode.Line,
+                                                trimLines: 3,
+                                                colorClickableText: Colors.pink,
+                                                trimCollapsedText: 'Show more',
+                                                trimExpandedText: ' Show less',
+                                                style: AppTextStyles.h6,
+                                                moreStyle: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         ReadMoreText(
                                           postModel.desc ?? '',
@@ -195,7 +209,7 @@ class FeedView extends StackedView<FeedViewModel> {
                                         Row(
                                           children: [
                                             Text(
-                                              "${DateFormat('dd MMM, HH:MM a').format(
+                                              "${DateFormat('dd MMM, hh:MM a').format(
                                                 postModel.lastSeen ??
                                                     DateTime.now(),
                                               )} |",

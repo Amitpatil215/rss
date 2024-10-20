@@ -18,8 +18,6 @@ https://pub.dev/packages/receive_sharing_intent
 ### UI
 1. Responsiveness for big screens
 4. Add relative timings for last seen atleast
-5. Change App ICON
-6. 
 
 #### EDIT POST
 1. Change due date,
