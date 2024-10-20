@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:rss/ui/common/ui_helpers.dart';
 
+import '../../../common/app_text_theme.dart';
 import 'startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
@@ -14,7 +15,7 @@ class StartupView extends StackedView<StartupViewModel> {
     StartupViewModel viewModel,
     Widget? child,
   ) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -22,9 +23,12 @@ class StartupView extends StackedView<StartupViewModel> {
             Text(
               'Spaced\nRepetition',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+              style: AppTextStyles.h2.copyWith(
+                color: Theme.of(context).primaryColor,
+              ),
             ),
-            Row(
+            verticalSpaceSmall,
+            const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text('Loading ...', style: TextStyle(fontSize: 16)),
@@ -34,7 +38,7 @@ class StartupView extends StackedView<StartupViewModel> {
                   height: 16,
                   child: CircularProgressIndicator(
                     color: Colors.black,
-                    strokeWidth: 6,
+                    strokeWidth: 2.0,
                   ),
                 )
               ],

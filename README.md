@@ -21,8 +21,6 @@ https://pub.dev/packages/receive_sharing_intent
 
 ### UI
 1. Responsiveness for big screens
-2. Fix overflow in the dialog
-3. Increase Link Preview height
 4. Add relative timings for last seen atleast
 5. Change App ICON
 6. 

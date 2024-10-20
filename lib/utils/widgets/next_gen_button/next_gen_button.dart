@@ -11,7 +11,7 @@ class JJMainCallToActionButtonWeb extends StatelessWidget {
   final Widget? icon;
   final bool isTransparent;
   final TextStyle? textStyle;
-  final Color bgColor;
+  final Color? bgColor;
   const JJMainCallToActionButtonWeb({
     required this.onPressed,
     this.text,
@@ -32,7 +32,7 @@ class JJMainCallToActionButtonWeb extends StatelessWidget {
           ? null
           : BoxDecoration(
               color: bgColor,
-              borderRadius: BorderRadius.circular(4.0),
+              borderRadius: BorderRadius.circular(10.0),
             ),
       child: NGButtonWidget(
         onPressed: onPressed,
@@ -43,7 +43,7 @@ class JJMainCallToActionButtonWeb extends StatelessWidget {
           disabledColor:
               isTransparent ? Colors.transparent : Colors.green.shade200,
           textStyle: textStyle ??
-              AppTextStyles.bodyText1.copyWith(
+              AppTextStyles.h7.copyWith(
                 color: Colors.white,
               ),
           elevation: 0.0,

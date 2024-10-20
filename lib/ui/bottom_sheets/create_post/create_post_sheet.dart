@@ -4,6 +4,7 @@ import 'package:rss/utils/widgets/next_gen_button/next_gen_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../common/app_text_theme.dart';
 import '../../../utils/input_decorations.dart';
 import 'create_post_sheet_model.dart';
 
@@ -36,17 +37,17 @@ class CreatePostSheet extends StackedView<CreatePostSheetModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
+            Text(
               'Add a new post!!',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+              style: AppTextStyles.h6,
             ),
-            verticalSpaceTiny,
+            verticalSpaceMedium,
             Form(
                 child: Column(
               children: [
                 TextFormField(
-                  minLines: 2,
-                  maxLines: 6,
+                  minLines: 4,
+                  maxLines: 8,
                   controller: viewModel.textController,
                   decoration: NGFieldInputDecorations.formFieldInputDecoration(
                           context: context, labelText: "Text")
@@ -57,10 +58,11 @@ class CreatePostSheet extends StackedView<CreatePostSheetModel> {
                   onPressed: viewModel.createPost,
                   width: double.infinity,
                   text: "Create",
+                  bgColor: Theme.of(context).buttonTheme.colorScheme!.primary,
                 )
               ],
             )),
-            verticalSpaceLarge,
+            verticalSpaceSmall,
           ],
         ),
       ),
