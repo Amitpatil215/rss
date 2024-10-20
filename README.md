@@ -7,10 +7,7 @@ A new Flutter project.
 2 Add escalete Button to prioratise
 
 #### TODO1 Filter
-1. Completed - Its imp to see completed tasks 
-2. Video
-4. Tasks
-5. Recently added
+1. Recently added
 
 #### Share intent
 https://pub.dev/packages/receive_sharing_intent

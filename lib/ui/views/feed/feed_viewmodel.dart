@@ -73,6 +73,16 @@ class FeedViewModel extends BaseViewModel {
         .update(PostsModel(lastSeen: DateTime.now()).toJsonNoNull());
   }
 
+  Future priortiseTask(PostsModel post) async {
+    await FirebaseFirestore.instance
+        .collection('posts')
+        .doc(post.id)
+        .update(PostsModel(
+          status: 'pending',
+          lastSeen: DateTime.now().subtract(const Duration(days: 30)),
+        ).toJsonNoNull());
+  }
+
   final List<FilterBy> _currentFilter = [FilterBy.PENDING];
 
   // apply filter

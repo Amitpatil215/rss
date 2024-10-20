@@ -94,11 +94,11 @@ class FeedView extends StackedView<FeedViewModel> {
                       children: [
                         // A SlidableAction can have an icon and/or a label.
                         SlidableAction(
-                          onPressed: (context) {},
+                          onPressed: (context) => viewModel.priortiseTask(postModel),
                           backgroundColor: Colors.purpleAccent,
                           foregroundColor: Colors.white,
-                          icon: Icons.alarm,
-                          label: 'Snooze',
+                          icon: Icons.bolt_rounded,
+                          label: 'Priortise',
                         ),
                         SlidableAction(
                           onPressed: (s) => viewModel.completeTask(postModel),
@@ -118,7 +118,7 @@ class FeedView extends StackedView<FeedViewModel> {
                           onPressed: (s) => viewModel.updateLastSeen(postModel),
                           backgroundColor: Colors.purple,
                           foregroundColor: Colors.white,
-                          icon: Icons.remove_red_eye_outlined,
+                          icon: Icons.spa_rounded,
                           label: 'Seen',
                         ),
                       ],
@@ -218,9 +218,6 @@ class FeedView extends StackedView<FeedViewModel> {
                                               style: AppTextStyles.caption,
                                             ),
                                           ],
-                                        ),
-                                        Text(
-                                          "${postModel.status} ${postModel.type}",
                                         ),
                                         verticalSpaceSmall,
                                       ]),
