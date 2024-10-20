@@ -66,6 +66,11 @@ class PostsModel {
       'type': type
     }.withoutNulls();
   }
+
+  @override
+  String toString() {
+    return 'PostsModel{text: $text, desc: $desc, id: $id, url: $url, createdAt: $createdAt, lastSeen: $lastSeen, status: $status, dueDate: $dueDate, type: $type}';
+  }
 }
 
 extension MapUtils<K, V> on Map<K, V> {

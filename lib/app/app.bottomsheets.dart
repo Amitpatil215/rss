@@ -8,11 +8,13 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
 import '../ui/bottom_sheets/create_post/create_post_sheet.dart';
+import '../ui/bottom_sheets/edit/edit_sheet.dart';
 import '../ui/bottom_sheets/notice/notice_sheet.dart';
 
 enum BottomSheetType {
   notice,
   createPost,
+  edit,
 }
 
 void setupBottomSheetUi() {
@@ -23,6 +25,8 @@ void setupBottomSheetUi() {
         NoticeSheet(request: request, completer: completer),
     BottomSheetType.createPost: (context, request, completer) =>
         CreatePostSheet(request: request, completer: completer),
+    BottomSheetType.edit: (context, request, completer) =>
+        EditSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);

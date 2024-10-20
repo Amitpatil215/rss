@@ -167,85 +167,90 @@ class FeedView extends StackedView<FeedViewModel> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              if (postModel.url != null)
-                                                const Icon(
-                                                    Icons.video_label_rounded,
-                                                    size: 15),
-                                              if (postModel.url == null)
-                                                const Icon(
-                                                    Icons
-                                                        .track_changes_outlined,
-                                                    size: 15),
-                                              horizontalSpaceTiny,
-                                              Expanded(
-                                                child: ReadMoreText(
-                                                  postModel.text ?? '',
-                                                  trimMode: TrimMode.Line,
-                                                  trimLines: 3,
-                                                  colorClickableText:
-                                                      Colors.pink,
-                                                  trimCollapsedText:
-                                                      'Show more',
-                                                  trimExpandedText:
-                                                      ' Show less',
-                                                  style: AppTextStyles.h6,
-                                                  moreStyle: const TextStyle(
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                    child: GestureDetector(
+                                      onLongPress: () =>
+                                          viewModel.openEditSheet(postModel),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                if (postModel.url != null)
+                                                  const Icon(
+                                                      Icons.video_label_rounded,
+                                                      size: 15),
+                                                if (postModel.url == null)
+                                                  const Icon(
+                                                      Icons
+                                                          .track_changes_outlined,
+                                                      size: 15),
+                                                horizontalSpaceTiny,
+                                                Expanded(
+                                                  child: ReadMoreText(
+                                                    postModel.text ?? '',
+                                                    trimMode: TrimMode.Line,
+                                                    trimLines: 3,
+                                                    colorClickableText:
+                                                        Colors.pink,
+                                                    trimCollapsedText:
+                                                        'Show more',
+                                                    trimExpandedText:
+                                                        ' Show less',
+                                                    style: AppTextStyles.h6,
+                                                    moreStyle: const TextStyle(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          ReadMoreText(
-                                            postModel.desc ?? '',
-                                            trimMode: TrimMode.Line,
-                                            trimLines: 3,
-                                            colorClickableText: Colors.pink,
-                                            trimCollapsedText: 'Show more',
-                                            trimExpandedText: ' Show less',
-                                            style: AppTextStyles.bodyText1,
-                                            moreStyle: const TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          verticalSpaceTiny,
-                                          Row(
-                                            children: [
-                                              Text(
-                                                "${DateFormat('dd MMM, hh:MM a').format(
-                                                  postModel.lastSeen ??
-                                                      DateTime.now(),
-                                                )} |",
-                                                style: AppTextStyles.caption,
-                                              ),
-                                              horizontalSpaceTiny,
-                                              Text(
-                                                "Due on ${DateFormat('dd MMM').format(
-                                                  postModel.dueDate ??
-                                                      DateTime.now(),
-                                                )} |",
-                                                style: AppTextStyles.caption,
-                                              ),
-                                              horizontalSpaceTiny,
-                                              Text(
-                                                "Created on ${DateFormat('dd MMM').format(
-                                                  postModel.createdAt ??
-                                                      DateTime.now(),
-                                                )}",
-                                                overflow: TextOverflow.ellipsis,
-                                                style: AppTextStyles.caption,
-                                              ),
-                                            ],
-                                          ),
-                                          verticalSpaceSmall,
-                                        ]),
+                                              ],
+                                            ),
+                                            ReadMoreText(
+                                              postModel.desc ?? '',
+                                              trimMode: TrimMode.Line,
+                                              trimLines: 3,
+                                              colorClickableText: Colors.pink,
+                                              trimCollapsedText: 'Show more',
+                                              trimExpandedText: ' Show less',
+                                              style: AppTextStyles.bodyText1,
+                                              moreStyle: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            verticalSpaceTiny,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  "${DateFormat('dd MMM, hh:MM a').format(
+                                                    postModel.lastSeen ??
+                                                        DateTime.now(),
+                                                  )} |",
+                                                  style: AppTextStyles.caption,
+                                                ),
+                                                horizontalSpaceTiny,
+                                                Text(
+                                                  "Due on ${DateFormat('dd MMM').format(
+                                                    postModel.dueDate ??
+                                                        DateTime.now(),
+                                                  )} |",
+                                                  style: AppTextStyles.caption,
+                                                ),
+                                                horizontalSpaceTiny,
+                                                Text(
+                                                  "Created on ${DateFormat('dd MMM').format(
+                                                    postModel.createdAt ??
+                                                        DateTime.now(),
+                                                  )}",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: AppTextStyles.caption,
+                                                ),
+                                              ],
+                                            ),
+                                            verticalSpaceSmall,
+                                          ]),
+                                    ),
                                   ),
                                 ],
                               ),

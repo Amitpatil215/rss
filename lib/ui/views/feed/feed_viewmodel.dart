@@ -116,4 +116,11 @@ class FeedViewModel extends BaseViewModel {
   // get current filter
   // getter
   List<FilterBy> get currentFilter => _currentFilter;
+
+  void openEditSheet(PostsModel post) {
+    _bottomSheetService.showCustomSheet<PostsModel, PostsModel>(
+      variant: BottomSheetType.edit,
+      data: post,
+    );
+  }
 }
