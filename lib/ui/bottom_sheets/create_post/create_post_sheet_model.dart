@@ -8,6 +8,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../../../app/app.locator.dart';
+import '../../../utils/util_functions.dart';
 
 class CreatePostSheetModel extends BaseViewModel {
   TextEditingController textController = TextEditingController();
@@ -40,14 +41,4 @@ class CreatePostSheetModel extends BaseViewModel {
   }
 }
 
-DateTime parseDate(String? data) {
-  if (data == null) {
-    return DateTime.now();
-  }
 
-  DateFormat dateFormat = DateFormat("dd-MM-yyyy");
-  // Parse the string to a DateTime object
-  DateTime parsedDate = dateFormat.parse(data);
-
-  return parsedDate;
-}

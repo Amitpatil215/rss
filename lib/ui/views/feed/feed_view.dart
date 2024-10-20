@@ -207,20 +207,28 @@ class FeedView extends StackedView<FeedViewModel> {
                                                   ),
                                                 ),
                                                 GestureDetector(
-                                                  child: const Padding(
-                                                    padding:
-                                                        EdgeInsets.all(2.0),
-                                                    child: Icon(
-                                                        Icons.comment_outlined,
-                                                        size: 15),
-                                                  ),
                                                   onTap: () => viewModel
                                                       .openCommentSheet(
                                                           postModel),
+                                                  child: Row(
+                                                    children: [
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.all(2.0),
+                                                        child: Icon(
+                                                            Icons
+                                                                .comment_outlined,
+                                                            size: 15),
+                                                      ),
+                                                      Text(
+                                                          (postModel.commentCount ??
+                                                                  0)
+                                                              .toString(),
+                                                          style: AppTextStyles
+                                                              .bodyText1),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Text("12",
-                                                    style: AppTextStyles
-                                                        .bodyText1),
                                               ],
                                             ),
                                             ReadMoreText(
