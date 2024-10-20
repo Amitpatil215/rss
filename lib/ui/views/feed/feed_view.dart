@@ -222,7 +222,7 @@ class FeedView extends StackedView<FeedViewModel> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "${DateFormat('dd MMM, hh:MM a').format(
+                                                  "${DateFormat('dd MMM, hh:mm a').format(
                                                     postModel.lastSeen ??
                                                         DateTime.now(),
                                                   )} |",
