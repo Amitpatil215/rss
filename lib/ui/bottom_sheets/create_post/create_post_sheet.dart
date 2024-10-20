@@ -31,36 +31,38 @@ class CreatePostSheet extends StackedView<CreatePostSheetModel> {
           topRight: Radius.circular(10),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text(
-            'Add a new post!!',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-          ),
-          verticalSpaceTiny,
-          Form(
-              child: Column(
-            children: [
-              TextFormField(
-                minLines: 2,
-                maxLines: 6,
-                controller: viewModel.textController,
-                decoration: NGFieldInputDecorations.formFieldInputDecoration(
-                        context: context, labelText: "Text")
-                    .copyWith(),
-              ),
-              verticalSpaceMedium,
-              JJMainCallToActionButtonWeb(
-                onPressed: viewModel.createPost,
-                width: double.infinity,
-                text: "Create",
-              )
-            ],
-          )),
-          verticalSpaceLarge,
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Add a new post!!',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+            ),
+            verticalSpaceTiny,
+            Form(
+                child: Column(
+              children: [
+                TextFormField(
+                  minLines: 2,
+                  maxLines: 6,
+                  controller: viewModel.textController,
+                  decoration: NGFieldInputDecorations.formFieldInputDecoration(
+                          context: context, labelText: "Text")
+                      .copyWith(),
+                ),
+                verticalSpaceMedium,
+                JJMainCallToActionButtonWeb(
+                  onPressed: viewModel.createPost,
+                  width: double.infinity,
+                  text: "Create",
+                )
+              ],
+            )),
+            verticalSpaceLarge,
+          ],
+        ),
       ),
     );
   }

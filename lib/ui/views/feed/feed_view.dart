@@ -23,28 +23,36 @@ class FeedView extends StackedView<FeedViewModel> {
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.95),
       body: Container(
+        margin: const EdgeInsets.only(left: 5.0, right: 5.0),
         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: MediaQuery.of(context).padding.top,
             ),
-            // SingleChildScrollView(
-            //   scrollDirection: Axis.horizontal,
-            //   child: Row(
-            //     children: [
-            //       for (int i = 0; i < 15; i++)
-            //         const Padding(
-            //           padding: EdgeInsets.all(5.0),
-            //           child: Chip(
-            //               label: Text(
-            //             "Video",
-            //             style: TextStyle(color: Colors.black),
-            //           )),
-            //         )
-            //     ],
-            //   ),
-            // ),
+            verticalSpaceSmall,
+            Text(
+              "Spaced Repetition",
+              style: AppTextStyles.h2,
+            ),
+            verticalSpaceSmall,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  for (int i = 0; i < 15; i++)
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
+                      child: Chip(
+                          label: Text(
+                        "Video",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                    )
+                ],
+              ),
+            ),
             Expanded(
               child: FirestoreListView<PostsModel>(
                 pageSize: 15,
@@ -104,7 +112,6 @@ class FeedView extends StackedView<FeedViewModel> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(10.0),
-                        border: Border.all(color: Colors.black12),
                       ),
                       child: Row(
                         children: [
@@ -112,83 +119,88 @@ class FeedView extends StackedView<FeedViewModel> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (postModel.url != null)
+                                if (postModel.url != null) ...[
                                   AnyLinkPreview(
                                     removeElevation: true,
+                                    previewHeight:
+                                        MediaQuery.of(context).size.width * 0.5,
                                     link: postModel.url!,
-                                    bodyMaxLines: 2,
                                     cache: const Duration(hours: 5),
                                     borderRadius: 10,
                                     backgroundColor: Colors.white,
                                     errorWidget: Container(
                                       color: Colors.white,
-                                      child: const Text('Oops!'),
+                                      child: const Text("Couldn't get preview"),
                                     ),
                                   ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, bottom: 10, top: 10),
-                                  child: ReadMoreText(
-                                    postModel.text ?? '',
-                                    trimMode: TrimMode.Line,
-                                    trimLines: 3,
-                                    colorClickableText: Colors.pink,
-                                    trimCollapsedText: 'Show more',
-                                    trimExpandedText: ' Show less',
-                                    style: AppTextStyles.bodyText1H,
-                                    moreStyle: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
+                                  const Divider(
+                                    thickness: 0.1,
                                   ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                    left: 10,
-                                    right: 10,
-                                  ),
-                                  child: ReadMoreText(
-                                    postModel.desc ?? '',
-                                    trimMode: TrimMode.Line,
-                                    trimLines: 3,
-                                    colorClickableText: Colors.pink,
-                                    trimCollapsedText: 'Show more',
-                                    trimExpandedText: ' Show less',
-                                    style: AppTextStyles.bodyText2,
-                                    moreStyle: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                    left: 10,
-                                    right: 10,
-                                    bottom: 10,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "${DateFormat('dd MMM, HH:MM a').format(
-                                          postModel.lastSeen ?? DateTime.now(),
-                                        )} |",
-                                        style: AppTextStyles.caption,
-                                      ),
-                                      horizontalSpaceTiny,
-                                      Text(
-                                        "Due on ${DateFormat('dd MMM').format(
-                                          postModel.dueDate ?? DateTime.now(),
-                                        )} |",
-                                        style: AppTextStyles.caption,
-                                      ),
-                                      horizontalSpaceTiny,
-                                      Text(
-                                        "Created on ${DateFormat('dd MMM').format(
-                                          postModel.createdAt ?? DateTime.now(),
-                                        )}",
-                                        style: AppTextStyles.caption,
-                                      ),
-                                    ],
-                                  ),
+                                ],
+                                if (postModel.url == null) ...[
+                                  verticalSpaceSmall,
+                                ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ReadMoreText(
+                                          postModel.text ?? '',
+                                          trimMode: TrimMode.Line,
+                                          trimLines: 3,
+                                          colorClickableText: Colors.pink,
+                                          trimCollapsedText: 'Show more',
+                                          trimExpandedText: ' Show less',
+                                          style: AppTextStyles.h6,
+                                          moreStyle: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        ReadMoreText(
+                                          postModel.desc ?? '',
+                                          trimMode: TrimMode.Line,
+                                          trimLines: 3,
+                                          colorClickableText: Colors.pink,
+                                          trimCollapsedText: 'Show more',
+                                          trimExpandedText: ' Show less',
+                                          style: AppTextStyles.bodyText1,
+                                          moreStyle: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        verticalSpaceTiny,
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${DateFormat('dd MMM, HH:MM a').format(
+                                                postModel.lastSeen ??
+                                                    DateTime.now(),
+                                              )} |",
+                                              style: AppTextStyles.caption,
+                                            ),
+                                            horizontalSpaceTiny,
+                                            Text(
+                                              "Due on ${DateFormat('dd MMM').format(
+                                                postModel.dueDate ??
+                                                    DateTime.now(),
+                                              )} |",
+                                              style: AppTextStyles.caption,
+                                            ),
+                                            horizontalSpaceTiny,
+                                            Text(
+                                              "Created on ${DateFormat('dd MMM').format(
+                                                postModel.createdAt ??
+                                                    DateTime.now(),
+                                              )}",
+                                              style: AppTextStyles.caption,
+                                            ),
+                                          ],
+                                        ),
+                                        verticalSpaceSmall,
+                                      ]),
                                 ),
                               ],
                             ),
