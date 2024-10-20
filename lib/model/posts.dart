@@ -6,7 +6,7 @@ class PostsModel {
   final DateTime? createdAt;
   final DateTime? lastSeen;
   final String? type;
-
+  final int? commentCount;
   final String? status; // Pending, Completed, Snoozed
   final DateTime? dueDate;
 
@@ -20,6 +20,7 @@ class PostsModel {
     this.status,
     this.dueDate,
     this.type,
+    this.commentCount,
   });
 
   // Factory constructor for creating a new PostsModel instance from a map
@@ -34,6 +35,7 @@ class PostsModel {
       status: json['status'] as String?,
       dueDate: json['due_date']?.toDate() as DateTime?,
       type: json['type'] as String?,
+      commentCount: json['comment_count'] as int?,
     );
   }
 
@@ -48,7 +50,8 @@ class PostsModel {
       'last_seen': lastSeen,
       'status': status,
       'due_date': dueDate,
-      'type': type
+      'type': type,
+      'comment_count': commentCount
     };
   }
 
@@ -63,13 +66,14 @@ class PostsModel {
       'last_seen': lastSeen,
       'status': status,
       'due_date': dueDate,
-      'type': type
+      'type': type,
+      'comment_count': commentCount,
     }.withoutNulls();
   }
 
   @override
   String toString() {
-    return 'PostsModel{text: $text, desc: $desc, id: $id, url: $url, createdAt: $createdAt, lastSeen: $lastSeen, status: $status, dueDate: $dueDate, type: $type}';
+    return 'PostsModel{text: $text, desc: $desc, id: $id, url: $url, createdAt: $createdAt, lastSeen: $lastSeen, status: $status, dueDate: $dueDate, type: $type, commentCount: $commentCount}';
   }
 }
 

@@ -113,4 +113,11 @@ class FeedViewModel extends BaseViewModel {
       data: post,
     );
   }
+
+  void openCommentSheet(PostsModel post) {
+    _bottomSheetService.showCustomSheet<PostsModel, PostsModel>(
+      variant: BottomSheetType.comment,
+      data: post,
+    );
+  }
 }

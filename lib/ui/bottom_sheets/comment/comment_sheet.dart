@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:rss/model/posts.dart';
 import 'package:rss/ui/common/app_colors.dart';
 import 'package:rss/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'edit_sheet_model.dart';
+import '../../../model/posts.dart';
+import 'comment_sheet_model.dart';
 
-class EditSheet extends StackedView<EditSheetModel> {
+class CommentSheet extends StackedView<CommentSheetModel> {
   final Function(SheetResponse response)? completer;
   final SheetRequest request;
-  const EditSheet({
+  const CommentSheet({
     Key? key,
     required this.completer,
     required this.request,
@@ -19,11 +19,10 @@ class EditSheet extends StackedView<EditSheetModel> {
   @override
   Widget builder(
     BuildContext context,
-    EditSheetModel viewModel,
+    CommentSheetModel viewModel,
     Widget? child,
   ) {
     var post = request.data as PostsModel;
-
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       decoration: const BoxDecoration(
@@ -33,23 +32,30 @@ class EditSheet extends StackedView<EditSheetModel> {
           topRight: Radius.circular(10),
         ),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SelectableText(
-              post.text ?? "",
-              style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            post.text ?? "",
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+          ),
+          if (request.description != null) ...[
+            verticalSpaceTiny,
+            Text(
+              request.description!,
+              style: const TextStyle(fontSize: 14, color: kcMediumGrey),
+              maxLines: 3,
+              softWrap: true,
             ),
-            verticalSpaceMedium,
-            SelectableText(post.toString()),
           ],
-        ),
+          verticalSpaceLarge,
+        ],
       ),
     );
   }
 
   @override
-  EditSheetModel viewModelBuilder(BuildContext context) => EditSheetModel();
+  CommentSheetModel viewModelBuilder(BuildContext context) =>
+      CommentSheetModel();
 }

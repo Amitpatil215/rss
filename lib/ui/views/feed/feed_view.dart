@@ -175,6 +175,8 @@ class FeedView extends StackedView<FeedViewModel> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 if (postModel.url != null)
                                                   const Icon(
@@ -204,6 +206,21 @@ class FeedView extends StackedView<FeedViewModel> {
                                                             FontWeight.bold),
                                                   ),
                                                 ),
+                                                GestureDetector(
+                                                  child: const Padding(
+                                                    padding:
+                                                        EdgeInsets.all(2.0),
+                                                    child: Icon(
+                                                        Icons.comment_outlined,
+                                                        size: 15),
+                                                  ),
+                                                  onTap: () => viewModel
+                                                      .openCommentSheet(
+                                                          postModel),
+                                                ),
+                                                Text("12",
+                                                    style: AppTextStyles
+                                                        .bodyText1),
                                               ],
                                             ),
                                             ReadMoreText(
