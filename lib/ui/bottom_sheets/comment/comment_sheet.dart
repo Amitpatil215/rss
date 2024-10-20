@@ -46,6 +46,8 @@ class CommentSheet extends StackedView<CommentSheetModel> {
           if (post.id != null)
             Expanded(
               child: FirestoreListView(
+                reverse: true,
+                pageSize: 10,
                 query: viewModel.getCommentQuery(post.id!),
                 itemBuilder: (context, snapshot) {
                   CommentModel comment = snapshot.data();

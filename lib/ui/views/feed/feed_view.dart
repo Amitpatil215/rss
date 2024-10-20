@@ -214,18 +214,21 @@ class FeedView extends StackedView<FeedViewModel> {
                                                     children: [
                                                       const Padding(
                                                         padding:
-                                                            EdgeInsets.all(2.0),
+                                                            EdgeInsets.all(3.0),
                                                         child: Icon(
-                                                            Icons
-                                                                .comment_outlined,
-                                                            size: 15),
+                                                          Icons
+                                                              .comment_outlined,
+                                                          size: 20,
+                                                          color: Colors.grey,
+                                                        ),
                                                       ),
                                                       Text(
-                                                          (postModel.commentCount ??
-                                                                  0)
-                                                              .toString(),
-                                                          style: AppTextStyles
-                                                              .bodyText1),
+                                                        (postModel.commentCount ??
+                                                                0)
+                                                            .toString(),
+                                                        style: AppTextStyles
+                                                            .bodyText1,
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
