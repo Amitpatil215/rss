@@ -41,22 +41,41 @@ class FeedView extends StackedView<FeedViewModel> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  for (int i = 0; i < 15; i++)
-                    const Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: Chip(
-                          label: Text(
-                        "Video",
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    )
+                  FilterChip(
+                    filterValue: FilterBy.VIDEO,
+                    onTap: (p0) {
+                      viewModel.applyFilter(FilterBy.VIDEO);
+                    },
+                    isSelected: viewModel.isSelected(FilterBy.VIDEO),
+                  ),
+                  FilterChip(
+                    filterValue: FilterBy.TASK,
+                    onTap: (p0) {
+                      viewModel.applyFilter(FilterBy.TASK);
+                    },
+                    isSelected: viewModel.isSelected(FilterBy.TASK),
+                  ),
+                  FilterChip(
+                    filterValue: FilterBy.PENDING,
+                    onTap: (p0) {
+                      viewModel.applyFilter(FilterBy.PENDING);
+                    },
+                    isSelected: viewModel.isSelected(FilterBy.PENDING),
+                  ),
+                  FilterChip(
+                    filterValue: FilterBy.COMPLETED,
+                    onTap: (p0) {
+                      viewModel.applyFilter(FilterBy.COMPLETED);
+                    },
+                    isSelected: viewModel.isSelected(FilterBy.COMPLETED),
+                  ),
                 ],
               ),
             ),
             Expanded(
               child: FirestoreListView<PostsModel>(
                 pageSize: 15,
-                query: viewModel.postsQuery,
+                query: viewModel.getQuery(),
                 itemBuilder: (context, snapshot) {
                   PostsModel postModel = snapshot.data();
                   return Slidable(
@@ -195,9 +214,13 @@ class FeedView extends StackedView<FeedViewModel> {
                                                 postModel.createdAt ??
                                                     DateTime.now(),
                                               )}",
+                                              overflow: TextOverflow.ellipsis,
                                               style: AppTextStyles.caption,
                                             ),
                                           ],
+                                        ),
+                                        Text(
+                                          "${postModel.status} ${postModel.type}",
                                         ),
                                         verticalSpaceSmall,
                                       ]),
@@ -227,4 +250,42 @@ class FeedView extends StackedView<FeedViewModel> {
     BuildContext context,
   ) =>
       FeedViewModel();
+}
+
+class FilterChip extends StatelessWidget {
+  final bool isSelected;
+  final FilterBy filterValue;
+  //callback
+  final Function(FilterBy) onTap;
+  const FilterChip({
+    super.key,
+    this.isSelected = false,
+    required this.filterValue,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: GestureDetector(
+        onTap: () => onTap(filterValue),
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? Colors.purpleAccent.withOpacity(0.2)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Text(
+            filterValue.name,
+            style: AppTextStyles.bodyText1.copyWith(
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                color: Colors.black),
+          ),
+        ),
+      ),
+    );
+  }
 }

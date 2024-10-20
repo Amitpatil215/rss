@@ -5,6 +5,7 @@ class PostsModel {
   final String? url;
   final DateTime? createdAt;
   final DateTime? lastSeen;
+  final String? type;
 
   final String? status; // Pending, Completed, Snoozed
   final DateTime? dueDate;
@@ -18,6 +19,7 @@ class PostsModel {
     this.lastSeen,
     this.status,
     this.dueDate,
+    this.type,
   });
 
   // Factory constructor for creating a new PostsModel instance from a map
@@ -31,6 +33,7 @@ class PostsModel {
       lastSeen: json['last_seen']?.toDate() as DateTime?,
       status: json['status'] as String?,
       dueDate: json['due_date']?.toDate() as DateTime?,
+      type: json['type'] as String?,
     );
   }
 
@@ -45,6 +48,7 @@ class PostsModel {
       'last_seen': lastSeen,
       'status': status,
       'due_date': dueDate,
+      'type': type
     };
   }
 
@@ -59,6 +63,7 @@ class PostsModel {
       'last_seen': lastSeen,
       'status': status,
       'due_date': dueDate,
+      'type': type
     }.withoutNulls();
   }
 }

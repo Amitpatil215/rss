@@ -27,6 +27,7 @@ class CreatePostSheetModel extends BaseViewModel {
                 desc: formattedTask.desc,
                 id: null,
                 url: formattedTask.url,
+                type: formattedTask.type,
                 createdAt: DateTime.now(),
                 lastSeen: DateTime.now(),
                 status: "pending",
