@@ -94,7 +94,8 @@ class FeedView extends StackedView<FeedViewModel> {
                       children: [
                         // A SlidableAction can have an icon and/or a label.
                         SlidableAction(
-                          onPressed: (context) => viewModel.priortiseTask(postModel),
+                          onPressed: (context) =>
+                              viewModel.priortiseTask(postModel),
                           backgroundColor: Colors.purpleAccent,
                           foregroundColor: Colors.white,
                           icon: Icons.bolt_rounded,
